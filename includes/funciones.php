@@ -14,12 +14,19 @@ function euros(float $cantidad): string {
 
 // Esta función se completará al aprender a guardar el carrito en una sesión.
 function unidadesCarrito(): int {
-    return 0;
+    return array_sum($_SESSION["carrito"]);
 }
 
 // Esta función se completará cuando el carrito ya exista.
 function totalCarrito(array $productos): float {
-    return 0.0;
+    $total = 0.0;
+
+    foreach ($_SESSION['carrito'] as $id => $cantidad) {
+        if (isset($productos[$id])) {
+            $total += $productos[$id]['precio'] * (int)$cantidad;
+        }
+    }
+    return $total;
 }
 
 // Comprueba que el formulario se ha enviado por POST.
